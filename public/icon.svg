@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="unBlueGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#009edb" />
+      <stop offset="100%" stop-color="#005a9c" />
+    </linearGradient>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#facc15" />
+      <stop offset="100%" stop-color="#ca8a04" />
+    </linearGradient>
+  </defs>
+  <!-- Background Disc with UN Blue -->
+  <rect width="512" height="512" rx="100" fill="#0b1329" />
+  <circle cx="256" cy="256" r="230" fill="url(#unBlueGrad)" stroke="#38bdf8" stroke-width="6" />
+  
+  <!-- Outer Tactical Compass Ring -->
+  <circle cx="256" cy="256" r="200" fill="none" stroke="#ffffff" stroke-width="2" stroke-dasharray="8 6" opacity="0.6" />
+  
+  <!-- Central Shield -->
+  <path d="M 256 90 L 370 140 C 370 280 256 380 256 400 C 256 380 142 280 142 140 Z" fill="#0f172a" stroke="url(#goldGrad)" stroke-width="8" />
+
+  <!-- UN Peacekeeping Blue Helmet Silhouette / Peace Dove & Olive Leaves -->
+  <g fill="#ffffff" opacity="0.95">
+    <!-- Blue Helmet Contour -->
+    <path d="M 200 230 C 200 170 312 170 312 230 C 322 232 328 242 320 250 L 192 250 C 184 242 190 232 200 230 Z" fill="#38bdf8" />
+    <path d="M 186 248 C 186 248 256 256 326 248 L 332 258 C 332 258 256 268 180 258 Z" fill="#ffffff" />
+    <!-- UN Lettering on Helmet -->
+    <text x="256" y="222" font-family="system-ui, -apple-system, sans-serif" font-size="28" font-weight="900" fill="#ffffff" text-anchor="middle" letter-spacing="3">UN</text>
+  </g>
+
+  <!-- Stars / Ranks -->
+  <polygon points="256,290 263,308 282,308 266,320 272,338 256,326 240,338 246,320 230,308 249,308" fill="url(#goldGrad)" />
+  <polygon points="206,305 211,318 226,318 214,327 218,340 206,331 194,340 198,327 186,318 201,318" fill="url(#goldGrad)" transform="scale(0.8) translate(40, 20)" />
+  <polygon points="306,305 311,318 326,318 314,327 318,340 306,331 294,340 298,327 286,318 301,318" fill="url(#goldGrad)" transform="scale(0.8) translate(70, 20)" />
+
+  <!-- Text -->
+  <text x="256" y="375" font-family="system-ui, -apple-system, sans-serif" font-size="18" font-weight="800" fill="#f8fafc" text-anchor="middle" letter-spacing="3">BANBAT-13, MINUSCA</text>
+  <text x="256" y="445" font-family="system-ui, -apple-system, sans-serif" font-size="16" font-weight="700" fill="#93c5fd" text-anchor="middle" letter-spacing="2">MECH COY-2 • 2027</text>
+</svg>

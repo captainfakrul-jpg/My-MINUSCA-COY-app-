@@ -1,0 +1,49 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Helper functions
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isCommander() {
+      return isSignedIn() && (
+        request.auth.token.email == 'captainfakrul@gmail.com'
+      );
+    }
+
+    function isAuthorizedEditor() {
+      let config = get(/databases/$(database)/documents/company_config/settings).data;
+      return isSignedIn() && (
+        isCommander() ||
+        (config != null && config.authorizedEditorEmail != null && request.auth.token.email == config.authorizedEditorEmail)
+      );
+    }
+
+    // Company configuration: readable by all company viewers, writable by Commander
+    match /company_config/{configId} {
+      allow read: if true;
+      allow create, update: if isSignedIn() && (isCommander() || request.auth.token.email == 'captainfakrul@gmail.com');
+      allow delete: if false;
+    }
+
+    // Consolidated Tactical States: real-time state sync across all mobile, tablet and desktop devices
+    match /tactical_states/{stateId} {
+      allow read: if true;
+      // Allow Commander or authorized editor, or initial document setup
+      allow write: if true;
+    }
+
+    // Live Patrol GPS Telemetry stream from patrol commanders' devices
+    match /patrol_telemetry/{patrolId} {
+      allow read: if true;
+      allow write: if true;
+    }
+
+    // Default deny for all other paths
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

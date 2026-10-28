@@ -1,0 +1,8 @@
+{
+  "name": "MINUSCA Peacekeeper Commander",
+  "description": "Tactical operations, personnel roster, logistics, patrol tracking, and combat readiness suite for UN Peacekeeping Infantry Company deployed under MINUSCA in Central African Republic.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

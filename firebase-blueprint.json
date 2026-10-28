@@ -1,0 +1,158 @@
+{
+  "entities": {
+    "CompanyConfig": {
+      "title": "CompanyConfig",
+      "description": "Company command configuration and authorized editor email settings",
+      "type": "object",
+      "properties": {
+        "primaryCommanderEmail": {
+          "type": "string",
+          "description": "Primary company commander email address"
+        },
+        "authorizedEditorEmail": {
+          "type": "string",
+          "description": "Secondary authorized co-commander or officer email who can edit all data"
+        },
+        "updatedAt": {
+          "type": "string",
+          "description": "ISO timestamp of last configuration update"
+        },
+        "updatedBy": {
+          "type": "string",
+          "description": "Email of user who updated configuration"
+        }
+      },
+      "required": ["primaryCommanderEmail"]
+    },
+    "TacticalState": {
+      "title": "TacticalState",
+      "description": "Consolidated company tactical data states synchronized across all devices",
+      "type": "object",
+      "properties": {
+        "personnel": {
+          "type": "array",
+          "description": "List of company personnel and readiness status"
+        },
+        "vehicles": {
+          "type": "array",
+          "description": "List of company vehicles and maintenance states"
+        },
+        "weapons": {
+          "type": "array",
+          "description": "List of weapons inventory and serials"
+        },
+        "ammunition": {
+          "type": "array",
+          "description": "Company ammunition stocks and reserve levels"
+        },
+        "dutyRoster": {
+          "type": "array",
+          "description": "Guard shift and duty assignments"
+        },
+        "patrols": {
+          "type": "array",
+          "description": "Active patrols and mission itineraries"
+        },
+        "ration": {
+          "type": "object",
+          "description": "Company rations and days of supply"
+        },
+        "leaves": {
+          "type": "array",
+          "description": "Approved and pending leave records"
+        },
+        "disciplineCases": {
+          "type": "array",
+          "description": "Legal, discipline and SEA safe records"
+        },
+        "transactions": {
+          "type": "array",
+          "description": "Contingent rolling fund expense transactions"
+        },
+        "medicalRecords": {
+          "type": "array",
+          "description": "Medical readiness and sick bay records"
+        },
+        "jobCards": {
+          "type": "array",
+          "description": "Vehicle maintenance workshop job cards"
+        },
+        "inventory": {
+          "type": "array",
+          "description": "UN COE equipment and generators"
+        },
+        "updatedAt": {
+          "type": "string",
+          "description": "ISO timestamp of last update"
+        },
+        "updatedBy": {
+          "type": "string",
+          "description": "Email or ID of the user who made the update"
+        }
+      },
+      "required": ["updatedAt"]
+    },
+    "LivePatrolTelemetry": {
+      "title": "LivePatrolTelemetry",
+      "description": "Live GPS coordinates broadcast from patrol commander device",
+      "type": "object",
+      "properties": {
+        "patrolId": {
+          "type": "string",
+          "description": "Unique patrol identifier"
+        },
+        "callsign": {
+          "type": "string",
+          "description": "Patrol callsign e.g. EAGLE 1"
+        },
+        "commanderName": {
+          "type": "string",
+          "description": "Name of patrol commander whose device is transmitting"
+        },
+        "lat": {
+          "type": "number",
+          "description": "Latitude coordinate in decimal degrees"
+        },
+        "lng": {
+          "type": "number",
+          "description": "Longitude coordinate in decimal degrees"
+        },
+        "accuracy": {
+          "type": "number",
+          "description": "GPS accuracy in meters"
+        },
+        "speedKmH": {
+          "type": "number",
+          "description": "Speed calculated from GPS in km/h"
+        },
+        "heading": {
+          "type": "number",
+          "description": "Compass heading in degrees"
+        },
+        "isTransmitting": {
+          "type": "boolean",
+          "description": "Whether live transmission is currently active"
+        },
+        "updatedAt": {
+          "type": "string",
+          "description": "Timestamp of coordinate fix"
+        }
+      },
+      "required": ["patrolId", "lat", "lng", "updatedAt"]
+    }
+  },
+  "firestore": {
+    "/company_config/{configId}": {
+      "schema": { "$ref": "#/entities/CompanyConfig" },
+      "description": "Access control and authorized editor configuration"
+    },
+    "/tactical_states/{stateId}": {
+      "schema": { "$ref": "#/entities/TacticalState" },
+      "description": "Live operational state synced across all company devices"
+    },
+    "/patrol_telemetry/{patrolId}": {
+      "schema": { "$ref": "#/entities/LivePatrolTelemetry" },
+      "description": "Live GPS location stream from patrol device location service"
+    }
+  }
+}
